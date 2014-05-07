@@ -3,5 +3,6 @@ class CameraController < UIViewController
     super
 
     self.view.backgroundColor = UIColor.whiteColor
+    self.title = "Camera Controller"
   end
 end

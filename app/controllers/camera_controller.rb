@@ -22,7 +22,7 @@ class CameraController < UIViewController
       nsdata_of_image = NSData.dataWithContentsOfFile(File.join(NSBundle.mainBundle.resourcePath, 'nyancat.jpg'))
 
       # Make UIImage of it
-      image = UIImage.imageWithData(nsdata_of_image) ##TODO: scale
+      image = UIImage.imageWithData(nsdata_of_image, scale: 4)
 
       self.send_to_image_editor(image)
     end

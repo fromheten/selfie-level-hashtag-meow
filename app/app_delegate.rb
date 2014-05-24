@@ -3,7 +3,9 @@ class AppDelegate
     @window = UIWindow.alloc.initWithFrame(UIScreen.mainScreen.bounds)
     @window.makeKeyAndVisible
 
-    @window.rootViewController = CameraController.alloc.initWithNibName(nil, bundle: nil)
+    @camera_controller = CameraController.alloc.initWithNibName(nil, bundle: nil)
+    @navigation_controller = UINavigationController.alloc.initWithRootViewController(@camera_controller)
+    @window.rootViewController = @navigation_controller
     true
   end
 end

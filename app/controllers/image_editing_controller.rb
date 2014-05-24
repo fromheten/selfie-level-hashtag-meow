@@ -8,7 +8,7 @@ class ImageEditingController < UIViewController
   end
   def viewDidLoad
     super
-    self.title = "にゃん View"
+    self.title = "Meow View"
     self.view.backgroundColor = UIColor.whiteColor
 
     # Make one container view where the image is shown
@@ -21,7 +21,7 @@ class ImageEditingController < UIViewController
     @image_view = UIImageView.alloc.initWithImage(self.image)
     @image_view.contentMode = UIViewContentModeScaleToFill
 
-    # @image_view_container.addSubview(@image_view)
+    @image_view_container.addSubview(@image_view)
     # Make one button that will add and remove filter. Above view should update
 
   end

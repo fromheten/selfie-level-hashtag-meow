@@ -5,19 +5,26 @@ class CameraController < UIViewController
     self.view.backgroundColor = UIColor.whiteColor
     self.title = "Camera Controller"
 
-    if(BW::Device.camera.rear?)
-      BW::Device.camera.rear.picture(media_types: [:image]) do |result|
-        # On the navigationController, push an ImageEditingController instance with result
-        image = result[:original_image]
-
-        # image_view = UIImageView.alloc.initWithImage(image)
-        # self.view.addSubview(image_view)
-        NSLog("image.class: ", image.class)
+    def send_to_image_editor(image)
         image_editing_viewcontroller = ImageEditingController.alloc.initWithImage(image)
         self.navigationController.pushViewController(image_editing_viewcontroller, animated:true)
+    end
+
+    if(BW::Device.camera.rear?)
+      BW::Device.camera.rear.picture(media_types: [:image]) do |result|
+        image = result[:original_image] # This is an UIImage
+
+        self.send_to_image_editor(image)
       end
     else
-      puts "no camera yo"
+      puts "no camera, yo"
+
+      nsdata_of_image = NSData.dataWithContentsOfFile(File.join(NSBundle.mainBundle.resourcePath, 'nyancat.jpg'))
+
+      # Make UIImage of it
+      image = UIImage.imageWithData(nsdata_of_image) ##TODO: scale
+
+      self.send_to_image_editor(image)
     end
   end
 end

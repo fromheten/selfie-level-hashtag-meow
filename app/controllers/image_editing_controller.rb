@@ -4,12 +4,25 @@ class ImageEditingController < UIViewController
   def initWithImage(image)
     initWithNibName(nil, bundle:nil)
     self.image = image
-    self.title = "Image Editing View"
     self
   end
   def viewDidLoad
     super
+    self.title = "にゃん View"
+    self.view.backgroundColor = UIColor.whiteColor
 
+    # Make one container view where the image is shown
+    # image_view_container should be a square, with the width of the device screen
+    device_width = Device.screen.width
+    @image_view_container = UIView.alloc.initWithFrame(CGRect.new([0, 50], [device_width, device_width]))
+    @image_view_container.backgroundColor = UIColor.grayColor
+    self.view.addSubview(@image_view_container)
+    # Make a view with the image, and place it into the container
+    @image_view = UIImageView.alloc.initWithImage(self.image)
+    @image_view.contentMode = UIViewContentModeScaleToFill
+
+    # @image_view_container.addSubview(@image_view)
+    # Make one button that will add and remove filter. Above view should update
 
   end
 end

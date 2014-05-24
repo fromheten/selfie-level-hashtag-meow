@@ -3,7 +3,8 @@ class ImageEditingController < UIViewController
 
   def initWithImage(image)
     initWithNibName(nil, bundle:nil)
-    self.image = image
+    scaled_image = UIImage.imageWithCGImage(image.CGImage, scale: 6, orientation:image.imageOrientation)
+    self.image = scaled_image
     self
   end
   def viewDidLoad
@@ -19,7 +20,7 @@ class ImageEditingController < UIViewController
     self.view.addSubview(@image_view_container)
     # Make a view with the image, and place it into the container
     @image_view = UIImageView.alloc.initWithImage(self.image)
-    @image_view.contentMode = UIViewContentModeScaleToFill
+    @image_view.contentMode = UIViewContentModeScaleAspectFit
 
     @image_view_container.addSubview(@image_view)
     # Make one button that will add and remove filter. Above view should update

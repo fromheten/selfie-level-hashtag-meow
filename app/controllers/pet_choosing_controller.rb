@@ -22,6 +22,10 @@ class PetChoosingController < UIViewController
 
     pet = pets[indexPath.row]
     cell.textLabel.text = pet[:name]
+    image_nsdata = NSData.dataWithContentsOfFile(File.join(NSBundle.mainBundle.resourcePath, "cats/#{pet[:image]}"))
+    image_object = UIImage.imageWithData(image_nsdata)
+    cell.imageView.image = image_object
+    puts cell.imageView.image
 
     cell
   end
@@ -33,20 +37,21 @@ class PetChoosingController < UIViewController
   def pets
     # This method gets a list of all the pets the user is allowed to use
     # For now it will be hardcoded
-    pussycats = [
-      {name: "Oscar F. Wild", filename: "oscar_wild.png"},
-      {name: "Fat the Cat", filename: "benedict-the-fat.png"}
-      # Name idea: Carl Catastrophy
+    katter = [
+      {name: "Oscar F. Wild", image: "oscar_wild.png"},
+      {name: "Fat the Cat", image: "benedict-the-fat.png"},
+      {name: "ET - Extra Terrestrial", image: "et.png"},
+      {name: "Karl Catastrophy", image: "karl-catastrophy.png"},
     ]
-    return pussycats
+    return katter
   end
 
   def pet_image(pet_index)
     #get the filename of pets[pet_index]
-    kitten_directory = NSBundle.resourcePath + "cats" #string
+    kitten_directory = "#{NSBundle.resourcePath}/cats" #string
     pet = pets[pet_index]
     pet_image_filename = "#{kitten_directory}/#{pet[:filename]}"
-    puts pet_image_filename
+    puts "pet_image_filename: #{pet_image_filename}"
 
     #Make UIImage from that file
     pet_image = UIImage.alloc.initWithContentsOfFile(pet_image_filename)

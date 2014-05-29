@@ -26,9 +26,7 @@ class PetChoosingController < UIViewController
     cell
   end
   def tableView(tableView, numberOfRowsInSection: indexPath)
-    #How many rows? should be pets.length
-    puts "#{indexPath}: #{pets.length}"
-
+    # This method tells the table how many rows to make
     pets.count
   end
 
@@ -37,13 +35,22 @@ class PetChoosingController < UIViewController
     # For now it will be hardcoded
     pussycats = [
       {name: "Oscar F. Wild", filename: "oscar_wild.png"},
-      {name: "Benedict the Fat", filename: "benedict-the-fat.png"}
+      {name: "Fat the Cat", filename: "benedict-the-fat.png"}
+      # Name idea: Carl Catastrophy
     ]
     return pussycats
   end
 
   def pet_image(pet_index)
-    kitten_directory = NSBundle.resourcePath + "cats/"
-    puts kitten_directory
+    #get the filename of pets[pet_index]
+    kitten_directory = NSBundle.resourcePath + "cats" #string
+    pet = pets[pet_index]
+    pet_image_filename = "#{kitten_directory}/#{pet[:filename]}"
+    puts pet_image_filename
+
+    #Make UIImage from that file
+    pet_image = UIImage.alloc.initWithContentsOfFile(pet_image_filename)
+
+    pet_image
   end
 end

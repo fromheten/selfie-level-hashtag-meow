@@ -12,28 +12,32 @@ class PetChoosingController < UIViewController
   end
 
   def tableView(tableView, cellForRowAtIndexPath: indexPath)
-    # Return a UITableViewCell for row[indexPath]
     @reuseIdentifier ||= "CELL_IDENTIFIER"
 
     cell = tableView.dequeueReusableCellWithIdentifier(@reuseIdentifier) || begin
       UITableViewCell.alloc.initWithStyle(UITableViewCellStyleDefault, reuseIdentifier:@reuseIdentifier)
     end
-    cell.textLabel.text = "HEJ"
+
+    puts "indexPath.row: #{indexPath.row} is #{pets[indexPath.row]}. かわいい！"
+
+    pet = pets[indexPath.row]
+    cell.textLabel.text = pet[:name]
 
     cell
   end
   def tableView(tableView, numberOfRowsInSection: indexPath)
     #How many rows? should be pets.length
-    puts pets.length
+    puts "#{indexPath}: #{pets.length}"
 
-    pets.length
+    pets.count
   end
 
   def pets
     # This method gets a list of all the pets the user is allowed to use
     # For now it will be hardcoded
     pussycats = [
-      {name: "Oscar F. Wild", filename: "oscar_wild.png"}
+      {name: "Oscar F. Wild", filename: "oscar_wild.png"},
+      {name: "Benedict the Fat", filename: "benedict-the-fat.png"}
     ]
     return pussycats
   end

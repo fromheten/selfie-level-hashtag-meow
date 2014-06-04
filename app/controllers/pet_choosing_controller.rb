@@ -8,7 +8,8 @@ class PetChoosingController < UIViewController
 
     @table = UITableView.alloc.initWithFrame(self.view.bounds)
     @table.dataSource = self
-    @table.rowHeight = 100
+    @table.delegate = self
+    # @table.rowHeight = 100
     self.view.addSubview(@table)
   end
 
@@ -33,6 +34,14 @@ class PetChoosingController < UIViewController
   def tableView(tableView, numberOfRowsInSection: indexPath)
     # This method tells the table how many rows to make
     pets.count
+  end
+
+  def tableView(tableView, didSelectRowAtIndexPath:indexPath)
+    tableView.deselectRowAtIndexPath(indexPath, animated: true)
+
+    # Instantiate a camera controller
+    camera_controller = CameraController.alloc.initWithNibName(nil, bundle: nil)
+    self.navigationController.pushViewController(camera_controller, animated: true)
   end
 
   def pets

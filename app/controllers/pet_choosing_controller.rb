@@ -8,6 +8,8 @@ class PetChoosingController < UIViewController
 
     @table = UITableView.alloc.initWithFrame(self.view.bounds)
     @table.dataSource = self
+    @table.delegate = self
+    # @table.rowHeight = 100
     self.view.addSubview(@table)
   end
 
@@ -34,6 +36,14 @@ class PetChoosingController < UIViewController
     pets.count
   end
 
+  def tableView(tableView, didSelectRowAtIndexPath:indexPath)
+    tableView.deselectRowAtIndexPath(indexPath, animated: true)
+
+    # Instantiate a camera controller
+    camera_controller = CameraController.alloc.initWithNibName(nil, bundle: nil)
+    self.navigationController.pushViewController(camera_controller, animated: true)
+  end
+
   def pets
     # This method gets a list of all the pets the user is allowed to use
     # For now it will be hardcoded
@@ -44,18 +54,5 @@ class PetChoosingController < UIViewController
       {name: "Karl Catastrophy", image: "karl-catastrophy.png"},
     ]
     return katter
-  end
-
-  def pet_image(pet_index)
-    #get the filename of pets[pet_index]
-    kitten_directory = "#{NSBundle.resourcePath}/cats" #string
-    pet = pets[pet_index]
-    pet_image_filename = "#{kitten_directory}/#{pet[:filename]}"
-    puts "pet_image_filename: #{pet_image_filename}"
-
-    #Make UIImage from that file
-    pet_image = UIImage.alloc.initWithContentsOfFile(pet_image_filename)
-
-    pet_image
   end
 end

@@ -9,7 +9,7 @@ class PetChoosingController < UIViewController
     @table = UITableView.alloc.initWithFrame(self.view.bounds)
     @table.dataSource = self
     @table.delegate = self
-    # @table.rowHeight = 100
+    @table.rowHeight = 100
     self.view.addSubview(@table)
   end
 

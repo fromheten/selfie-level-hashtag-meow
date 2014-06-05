@@ -3,13 +3,17 @@ class ImageEditingController < UIViewController
 
   def initWithImage(image)
     initWithNibName(nil, bundle:nil)
-    scaled_image = UIImage.imageWithCGImage(image.CGImage, scale: 6, orientation:image.imageOrientation)
-    self.image = scaled_image
+    if image == nil
+      self.image = UIImage.imageNamed("nyancat.jpg")
+    else
+      scaled_image = UIImage.imageWithCGImage(image.CGImage, scale: 6, orientation:image.imageOrientation)
+      self.image = scaled_image
+    end
     self
   end
   def viewDidLoad
     super
-    self.title = "Meow View"
+    self.title = "Image Editor"
     self.view.backgroundColor = UIColor.whiteColor
 
     # Make one container view where the image is shown

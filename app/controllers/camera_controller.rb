@@ -8,7 +8,7 @@ class CameraController < UIViewController
   def viewDidLoad
     self.view.backgroundColor = UIColor.whiteColor
 
-    self.setCaptureManager(CaptureSessionManager.alloc.init.autorelease)
+    self.setCaptureManager(CaptureSessionManager.alloc.init)#.autorelease)
     self.captureManager.addVideoInput
     self.captureManager.addVideoPreviewLayer
     screen_width = UIScreen.mainScreen.bounds.size.width;
@@ -25,19 +25,22 @@ class CameraController < UIViewController
     self.view.addSubview overlayImageView
 
     take_picture_button = UIButton.buttonWithType UIButtonTypeRoundedRect
-    # take_picture_button.setImage(UIImage.imageNamed("scanbutton.png"), forState:UIControlStateNormal)
     take_picture_button.setTitle("Meow!", forState: UIControlStateNormal)
     take_picture_button.setFrame(CGRectMake(130, 450, 60, 30))
     take_picture_button.addTarget(self, action:'take_picture', forControlEvents:UIControlEventTouchUpInside)
-    self.view.addSubview take_picture_button
+    self.view.addSubview(take_picture_button)
 
     captureManager.captureSession.startRunning
   end
 
   def take_picture
-    #TODO get current image
+    self.captureManager.addStillImageOutput
+    self.captureManager.captureStillImage
+    # image = self.captureManager.stillImage
+  end
 
-    image_editing_controller = ImageEditingController.alloc.initWithImage(nil)
+  def open_image_editor(ui_image)
+    image_editing_controller = ImageEditingController.alloc.initWithImage(ui_image)
     self.navigationController.pushViewController(image_editing_controller, animated: true)
   end
 end

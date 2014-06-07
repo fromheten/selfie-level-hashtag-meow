@@ -12,4 +12,5 @@ Motion::Project::App.setup do |app|
   # Use `rake config' to see complete project settings.
   # app.name = 'selfie-level-hashtag-meow'
   app.name = 'selfie #MEOW'
+  app.frameworks += ["AVFoundation", "UIKit", "Foundation", "CoreGraphics", "ImageIO", "CoreMedia", "CoreVideo"]
 end

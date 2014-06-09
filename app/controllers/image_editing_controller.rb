@@ -6,8 +6,9 @@ class ImageEditingController < UIViewController
     if image == nil
       self.image = UIImage.imageNamed("nyancat.jpg")
     else
-      scaled_image = UIImage.imageWithCGImage(image.CGImage, scale: 6, orientation:image.imageOrientation)
-      self.image = scaled_image
+      # scaled_image = UIImage.imageWithCGImage(image.CGImage, scale: 6, orientation:image.imageOrientation)
+      # self.image = scaled_image
+      self.image = image
     end
     self
   end
@@ -18,13 +19,14 @@ class ImageEditingController < UIViewController
 
     # Make one container view where the image is shown
     # image_view_container should be a square, with the width of the device screen
-    device_width = Device.screen.width
+    device_width = UIScreen.mainScreen.bounds.size.width
     @image_view_container = UIView.alloc.initWithFrame(CGRect.new([0, 50], [device_width, device_width]))
     @image_view_container.backgroundColor = UIColor.grayColor
     self.view.addSubview(@image_view_container)
     # Make a view with the image, and place it into the container
     @image_view = UIImageView.alloc.initWithImage(self.image)
-    @image_view.contentMode = UIViewContentModeScaleAspectFit
+    # UIImageWriteToSavedPhotosAlbum(self.image, nil, nil, nil)
+    # @image_view.contentMode = UIViewContentModeScaleToFill
 
     @image_view_container.addSubview(@image_view)
     # Make one button that will add and remove filter. Above view should update

@@ -69,6 +69,12 @@ class CaptureSessionManager
     videoDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
     if videoDevice
       error = Pointer.new("@")
+      if videoDevice.isWhiteBalanceModeSupported(AVCaptureWhiteBalanceModeContinuousAutoWhiteBalance)
+        if videoDevice.lockForConfiguration nil
+          videoDevice.setWhiteBalanceMode(AVCaptureWhiteBalanceModeContinuousAutoWhiteBalance)
+          videoDevice.unlockForConfiguration()
+        end
+      end
       videoIn = AVCaptureDeviceInput.deviceInputWithDevice(videoDevice, error: error)
       if !error[0]
         if self.captureSession.canAddInput(videoIn)

@@ -11,6 +11,7 @@ class CameraController < UIViewController
     self.setCaptureManager(CaptureSessionManager.alloc.init)#.autorelease)
     self.captureManager.addVideoInput
     self.captureManager.addVideoPreviewLayer
+
     screen_width = UIScreen.mainScreen.bounds.size.width;
     layerRect = CGRectMake(0, self.navigationController.toolbar.frame.size.height,
                            screen_width, screen_width)
@@ -20,7 +21,7 @@ class CameraController < UIViewController
     self.view.layer.addSublayer(self.captureManager.previewLayer)
 
     #TODO Get cat's image
-    overlayImageView = UIImageView.alloc.initWithImage(UIImage.imageNamed("overlaygraphic.png"))
+    overlayImageView = UIImageView.alloc.initWithImage(UIImage.imageNamed("nyancat.jpg"))
     overlayImageView.frame = [[30, 100], [260, 200]]
     self.view.addSubview overlayImageView
 

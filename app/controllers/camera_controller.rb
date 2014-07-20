@@ -30,7 +30,17 @@ class CameraController < UIViewController
     take_picture_button.addTarget(self, action:'take_picture', forControlEvents:UIControlEventTouchUpInside)
     self.view.addSubview(take_picture_button)
 
+    flash_toggle_button = UIButton.buttonWithType(UIButtonTypeRoundedRect)
+    flash_toggle_button.setTitle("Flash", forState: UIControlStateNormal)
+    flash_toggle_button.setFrame CGRectMake(70, 450, 60, 30)
+    flash_toggle_button.addTarget(self, action:'toggle_flash', forControlEvents: UIControlEventTouchUpInside)
+    self.view.addSubview(flash_toggle_button)
+
     captureManager.captureSession.startRunning
+  end
+
+  def toggle_flash
+    App.alert("No flash functionality yet")
   end
 
   def take_picture

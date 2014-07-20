@@ -40,7 +40,17 @@ class CameraController < UIViewController
   end
 
   def toggle_flash
-    App.alert("No flash functionality yet")
+    device = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
+    # App.alert(device.torchMode)
+    if (device.hasTorch)
+      device.lockForConfiguration(nil)
+      if (device.torchMode.to_s == "1") #ON
+        device.setTorchMode(AVCaptureTorchModeOff)
+      else
+        device.setTorchMode(AVCaptureTorchModeOn)
+      end
+      device.unlockForConfiguration()
+    end
   end
 
   def take_picture

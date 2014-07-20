@@ -40,19 +40,20 @@ class PetChoosingController < UIViewController
     tableView.deselectRowAtIndexPath(indexPath, animated: true)
 
     # Instantiate a camera controller
-    camera_controller = CameraController.alloc.initWithNibName(nil, bundle: nil)
+    # camera_controller = CameraController.alloc.initWithNibName(nil, bundle: nil)
+    camera_controller = CameraController.alloc.initWithForegroundImage(nil, bundle: nil)
     self.navigationController.pushViewController(camera_controller, animated: true)
   end
 
   def pets
     # This method gets a list of all the pets the user is allowed to use
     # For now it will be hardcoded
-    katter = [
+    pet_list = [
       {name: "Oscar F. Wild", image: "oscar_wild.png"},
       {name: "Fat the Cat", image: "benedict-the-fat.png"},
       {name: "ET - Extra Terrestrial", image: "et.png"},
       {name: "Karl Catastrophy", image: "karl-catastrophy.png"},
     ]
-    return katter
+    return pet_list
   end
 end

@@ -5,6 +5,13 @@ class CameraController < UIViewController
     super
   end
 
+  def initWithForegroundImage(image)
+    # This controller shows a camera, and overlays a pet on there. Kawaii!
+    self.init
+    self.foregroundUIImage = image
+    self
+  end
+
   def viewDidLoad
     self.view.backgroundColor = UIColor.whiteColor
 

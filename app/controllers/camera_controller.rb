@@ -42,7 +42,6 @@ class CameraController < UIViewController
 
   def toggle_flash
     device = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
-    # App.alert(device.torchMode)
     if (device.hasTorch)
       device.lockForConfiguration(nil)
       if (device.torchMode.to_s == "1") #ON

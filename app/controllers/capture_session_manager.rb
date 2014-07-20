@@ -7,10 +7,8 @@ class CaptureSessionManager
     self
   end
 
-  ## NEW
   def addStillImageOutput
     self.setStillImageOutput(AVCaptureStillImageOutput.alloc.init)
-    # outputSettings = NSDictionary.alloc.initWithObjectsAndKeys(AVVideoCodecJPEG, AVVideoCodecKey, nil)
     outputSettings = {AVVideoCodecKey => AVVideoCodecJPEG }
 
     self.stillImageOutput.outputSettings = outputSettings
